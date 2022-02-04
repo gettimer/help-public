@@ -113,7 +113,7 @@ function Header({ pages, setIsOpenNav = null, isOpenNav = null, showBurger = fal
                                 {searchResults !== null ? (
                                     <>
                                         {searchResults.map((elem) => (
-                                            <Link key={elem.tool + elem.url} href={`/${elem.tool}/${elem.category}/${elem.url}`}>
+                                            <Link key={elem.tool + elem.url} href={`/${elem.tool}/${elem.category.includes('_') ? elem.category.replace('_', '-'): elem.category}/${elem.url}`}>
                                                 <a onClick={() => setSearchActive(false)}>
                                                     <small>
                                                         {elem.tool} tool {">"} {elem.category}{" "}
