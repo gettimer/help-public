@@ -107,7 +107,8 @@ function Publish({ pages, publishTool, navigationData }) {
     );
 }
 export async function getStaticProps() {
-    const allPages = await fetchAPI();
+    const request_data = await fetch(`https://mweb-api.circleboom.com/helps?Tool=publish`)
+    const allPages = await request_data.json()
     let publishToolHelps = [];
     let publishToolOrder;
 

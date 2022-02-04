@@ -111,7 +111,8 @@ function Twitter({ pages, twitterTool, navigationData, tools }) {
     );
 }
 export async function getStaticProps() {
-    const allPages = await fetchAPI();
+    const request_data = await fetch(`https://mweb-api.circleboom.com/helps?Tool=twitter`)
+    const allPages = await request_data.json()
     let twitterToolHelps = [];
     let twitterToolOrder;
 
