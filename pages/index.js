@@ -26,32 +26,20 @@ function Layout({ pages }) {
         setFeaturedItems(helpItems);
     }, []);
 
-    const handleChange = (e) => {
-        const { value } = e.target;
-        setSearchKey(value);
-        let matchingResults = [];
-        pages.map((ele) => {
-            if (ele.Title.toLowerCase().includes(value.toLowerCase()) || ele.Content.toLowerCase().includes(value.toLowerCase())) {
-                const start = ele.Title.substring(0, ele.Title.toLowerCase().search(value.toLowerCase()));
+    const startSearch = async (key) => {
+        const request_data = await fetch(`https://mweb-api.circleboom.com/helps?Content_contains=${key}&Title_contains=${key}`)
+        const allPages = await request_data.json()
 
-                if (ele.Title.toLowerCase().includes(value.toLowerCase())) {
-                    matchingResults.push({
-                        title: ele.Title.toLowerCase()
-                            .split(value.toLowerCase())
-                            .join("<span>" + value + "</span>"),
-                        category: ele.Category,
-                        tool: ele.Tool,
-                        url: createSlug(ele.Title),
-                    });
-                } else {
-                    matchingResults.push({
-                        title: ele.Title.toLowerCase(),
-                        category: ele.Category,
-                        tool: ele.Tool,
-                        url: createSlug(ele.Title),
-                    });
-                }
-            }
+        let matchingResults = [];
+        allPages.map((ele) => {
+            matchingResults.push({
+                title: ele.Title.toLowerCase()
+                    .split(key.toLowerCase())
+                    .join("<span>" + key + "</span>"),
+                category: ele.Category,
+                tool: ele.Tool,
+                url: createSlug(ele.Title),
+            });
         });
 
         if (matchingResults.length === 0) {
@@ -59,6 +47,13 @@ function Layout({ pages }) {
         } else {
             setSearchResults(matchingResults);
         }
+
+    }
+
+    const handleChange = (e) => {
+        const { value } = e.target;
+        setSearchKey(value);
+        startSearch(value);
     };
 
     return (
