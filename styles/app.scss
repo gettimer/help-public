@@ -1,0 +1,10 @@
+@import 'core/reset'; 
+
+body {
+    font-family: 'SF Pro Text',-apple-system,BlinkMacSystemFont,Roboto,'Segoe UI',Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
+    text-rendering: optimizeLegibility;
+    background-color:var(--bg-color);
+    color:var(--font-color);
+}
+
+
