@@ -45,6 +45,7 @@ function Page({ pages, pageData, tool, navigationData, prevPageData, nextPageDat
                 <title>{pageData.Title}</title>
                 <link rel='icon' href='/favicon.ico' />
                 <meta name='description' content={pageData.MetaDescription} />
+                <meta name="robots" content="noindex">
             </Head>
             <Header pages={pages} isOpenNav={isOpenNav} setIsOpenNav={setIsOpenNav} showBurger={true} />
             <main className={styles.wrapper}>
